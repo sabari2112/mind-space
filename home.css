@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.logo div {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #2d5a4e;
+  line-height: 1.2;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+}
+
+nav ul a:hover {
+  color: #2d5a4e;
+}
+
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+  min-height: calc(100vh - 96px);
+}
+
+.hero-text {
+  max-width: 460px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+h1 span {
+  color: #2d5a4e;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-filled {
+  background: #2d5a4e;
+  color: white;
+  padding: 12px 26px;
+  border: 2px solid #2d5a4e;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #2d5a4e;
+  padding: 12px 26px;
+  border: 2px solid #2d5a4e;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-filled:hover { background: #3d7a68; border-color: #3d7a68; }
+.btn-outline:hover { background: #2d5a4e; color: white; }
+
+/* BRAIN IMAGE */
+.brain {
+  width: 320px;
+  height: 320px;
+  object-fit: contain;
+  margin-left: 50px;
+  margin-top: 0px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 20px 32px; }
+
+  .hero {
+    flex-direction: column-reverse;
+    padding: 40px 32px;
+    text-align: center;
+    gap: 20px ;
+    min-height: auto;
+  }
+
+  .buttons { justify-content: center; }
+  .brain { width: 220px; height: 220px; }
+}
+
+@media (max-width: 560px) {
+  nav ul { display: none; }
+  h1 { font-size: 2.2rem; }
+}

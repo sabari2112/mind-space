@@ -1,0 +1,175 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.logo div {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #2d5a4e;
+  line-height: 1.2;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+}
+
+nav ul a:hover,
+nav ul a.active {
+  color: #2d5a4e;
+  font-weight: 500;
+}
+
+/* HERO */
+.assessment-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 80px 100px;
+  min-height: calc(100vh - 96px);
+}
+
+.badge {
+  display: inline-block;
+  background: #eaf2ef;
+  color: #2d5a4e;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  max-width: 560px;
+}
+
+h1 span {
+  color: #2d5a4e;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #555;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+
+/* INFO CARDS */
+.info-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.info-card {
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  padding: 28px 36px;
+  text-align: center;
+  min-width: 150px;
+}
+
+.info-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* BUTTON */
+.btn-filled {
+  background: #2d5a4e;
+  color: white;
+  padding: 14px 36px;
+  border: 2px solid #2d5a4e;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.btn-filled:hover {
+  background: #3d7a68;
+  border-color: #3d7a68;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 20px 32px; }
+  .assessment-hero { padding: 60px 32px 80px; }
+  .info-cards { flex-direction: column; align-items: center; }
+  .info-card { width: 100%; max-width: 300px; }
+}
+
+@media (max-width: 560px) {
+  nav ul { display: none; }
+  h1 { font-size: 2.2rem; }
+}
