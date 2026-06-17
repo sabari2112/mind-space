@@ -167,6 +167,56 @@ nav ul a.active {
   color: white;
 }
 
+.btn-outline,
+.btn-filled {
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+/* MODAL (HTML5 dialog element) */
+.modal {
+  border: none;
+  padding: 36px 40px;
+  max-width: 420px;
+  width: 90%;
+}
+
+.modal::backdrop {
+  background: rgba(26, 26, 26, 0.5);
+}
+
+.modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.modal p {
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-actions .btn-filled {
+  background: #2d5a4e;
+  color: white;
+  padding: 10px 22px;
+  border: 2px solid #2d5a4e;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.modal-actions .btn-outline {
+  padding: 10px 22px;
+  font-size: 13px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1060px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }

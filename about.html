@@ -80,8 +80,24 @@
   <section class="about-cta">
     <h2>Ready to take the first step?</h2>
     <p>Our assessment takes less than 10 minutes and helps us find the right professional for you.</p>
-    <a href="assessment.html" class="btn-filled">Take the Assessment</a>
+    <div class="cta-actions">
+      <a href="assessment.html" class="btn-filled">Take the Assessment</a>
+      <button type="button" class="btn-outline" onclick="founderModal.showModal()">Read Our Story</button>
+    </div>
   </section>
+
+  <!-- FOUNDER STORY MODAL (HTML5 <dialog> element) -->
+  <dialog id="founderModal" class="modal">
+    <h3>Why we started MindSpace</h3>
+    <p>MindSpace began after our founder struggled to find the right therapist during a difficult year — not because help wasn't available, but because finding the right fit felt like guesswork. We built MindSpace so no one else has to navigate that alone.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline" onclick="founderModal.close()">Close</button>
+    </div>
+  </dialog>
+
+  <script>
+    const founderModal = document.getElementById('founderModal');
+  </script>
 
 </body>
 </html>

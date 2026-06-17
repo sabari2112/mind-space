@@ -30,12 +30,26 @@
       <h1>Your journey to a clear <span>Mind Space</span> starts <span>here</span></h1>
       <p>Take our assessment to help us locate you better through the journey and guide you to the right professional.</p>
       <div class="buttons">
-        <a href="#" class="btn-filled">Take Assessment</a>
-        <a href="#" class="btn-outline">Explore Services</a>
+        <a href="assessment.html" class="btn-filled">Take Assessment</a>
+        <a href="services.html" class="btn-outline">Explore Services</a>
       </div>
+      <button type="button" class="link-btn" onclick="howItWorksModal.showModal()">How does this work?</button>
     </div>
     <img src="images/Home ICON.png" alt="Brain Illustration" class="brain"/>
   </section>
+
+  <!-- HOW IT WORKS MODAL (HTML5 <dialog> element) -->
+  <dialog id="howItWorksModal" class="modal">
+    <h3>How MindSpace works</h3>
+    <p>Take a short assessment, get matched with a professional suited to your needs, then book a session directly from your profile. Three steps, no guesswork.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline" onclick="howItWorksModal.close()">Close</button>
+    </div>
+  </dialog>
+
+  <script>
+    const howItWorksModal = document.getElementById('howItWorksModal');
+  </script>
 
 </body>
 </html>

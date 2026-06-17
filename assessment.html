@@ -26,6 +26,8 @@
   </nav>
 
   <section class="assessment-hero">
+    <p id="returningBanner" class="returning-banner" hidden>Welcome back — pick up your assessment whenever you're ready.</p>
+
     <div class="badge">Mental Health Assessment</div>
     <h1>Understand yourself <span>better</span></h1>
     <p>
@@ -52,9 +54,32 @@
       </div>
     </div>
 
-    <a href="questions.html" class="btn-filled">Begin Assessment</a>
+    <div class="hero-actions">
+      <a href="questions.html" class="btn-filled">Begin Assessment</a>
+      <button type="button" class="btn-outline" onclick="privacyModal.showModal()">How we use this</button>
+    </div>
     <p class="disclaimer">Your answers are never shared without your consent.</p>
   </section>
+
+  <!-- PRIVACY INFO MODAL (HTML5 <dialog> element) -->
+  <dialog id="privacyModal" class="modal">
+    <h3>How we use your answers</h3>
+    <p>Your responses are used only to match you with a suitable professional from our Services page. They're never sold, shared with advertisers, or shown to anyone besides your matched professional.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline" onclick="privacyModal.close()">Got it</button>
+    </div>
+  </dialog>
+
+  <script>
+    // HTML5 Web Storage API: greet returning visitors
+    const privacyModal = document.getElementById('privacyModal');
+    const returningBanner = document.getElementById('returningBanner');
+
+    if (localStorage.getItem('mindspaceVisited')) {
+      returningBanner.hidden = false;
+    }
+    localStorage.setItem('mindspaceVisited', 'true');
+  </script>
 
 </body>
 </html>

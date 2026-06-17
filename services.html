@@ -42,7 +42,7 @@
         <span>&#127988; English, Hindi</span>
         <span>&#128205; Bangalore</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Dr. Arjun Mehta')">Book Session</button>
     </div>
 
     <div class="card">
@@ -55,7 +55,7 @@
         <span>&#127988; English, Malayalam</span>
         <span>&#128205; Kochi</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Dr. Priya Nair')">Book Session</button>
     </div>
 
     <div class="card">
@@ -68,7 +68,7 @@
         <span>&#127988; English, Kannada</span>
         <span>&#128205; Mysore</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Rohan Shetty')">Book Session</button>
     </div>
 
     <div class="card">
@@ -81,7 +81,7 @@
         <span>&#127988; English, Telugu</span>
         <span>&#128205; Hyderabad</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Dr. Sneha Rao')">Book Session</button>
     </div>
 
     <div class="card">
@@ -94,7 +94,7 @@
         <span>&#127988; English, Tamil</span>
         <span>&#128205; Chennai</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Kavitha Iyer')">Book Session</button>
     </div>
 
     <div class="card">
@@ -107,10 +107,34 @@
         <span>&#127988; English, Marathi</span>
         <span>&#128205; Pune</span>
       </div>
-      <a href="assessment.html" class="btn-outline">Book Session</a>
+      <button type="button" class="btn-outline" onclick="openBooking('Dr. Sameer &amp; Anita Joshi')">Book Session</button>
     </div>
 
   </section>
+
+  <!-- BOOKING MODAL (HTML5 <dialog> element) -->
+  <dialog id="bookingModal" class="modal">
+    <h3>Confirm Booking</h3>
+    <p>You're about to request a session with <strong id="modalName">this professional</strong>. We'll email you available time slots within 24 hours.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline" onclick="closeBooking()">Cancel</button>
+      <a href="assessment.html" class="btn-filled">Continue to Assessment</a>
+    </div>
+  </dialog>
+
+  <script>
+    const bookingModal = document.getElementById('bookingModal');
+    const modalName = document.getElementById('modalName');
+
+    function openBooking(name) {
+      modalName.textContent = name;
+      bookingModal.showModal();
+    }
+
+    function closeBooking() {
+      bookingModal.close();
+    }
+  </script>
 
 </body>
 </html>

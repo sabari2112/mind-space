@@ -40,7 +40,7 @@
         <a href="#settings" class="sidebar-link">Settings</a>
       </nav>
       <div class="divider"></div>
-      <a href="home.html" class="btn-outline-small">Sign Out</a>
+      <button type="button" class="btn-outline-small" onclick="signOutModal.showModal()">Sign Out</button>
     </aside>
 
     <!-- MAIN CONTENT -->
@@ -136,26 +136,68 @@
         <h2>Settings</h2>
         <div class="settings-form">
           <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" value="Anika Sharma" disabled/>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" value="Anika Sharma"/>
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" value="anika.sharma@email.com" disabled/>
+            <label for="email">Email</label>
+            <input type="email" id="email" value="anika.sharma@email.com"/>
           </div>
           <div class="form-group">
-            <label>Preferred Language</label>
-            <input type="text" value="English" disabled/>
+            <label for="language">Preferred Language</label>
+            <input type="text" id="language" value="English"/>
           </div>
           <div class="form-group">
-            <label>Notifications</label>
-            <input type="text" value="Session reminders ON" disabled/>
+            <label for="notifications">Notifications</label>
+            <input type="text" id="notifications" value="Session reminders ON"/>
           </div>
         </div>
+        <button type="button" class="btn-filled" onclick="saveSettings()">Save Changes</button>
+        <p id="saveMessage" class="save-message"></p>
       </section>
 
     </main>
   </div>
+
+  <!-- SIGN OUT MODAL (HTML5 <dialog> element) -->
+  <dialog id="signOutModal" class="modal">
+    <h3>Sign out of MindSpace?</h3>
+    <p>You'll need to sign back in to view your sessions and assessment history.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline-small" onclick="signOutModal.close()">Cancel</button>
+      <a href="home.html" class="btn-filled">Sign Out</a>
+    </div>
+  </dialog>
+
+  <script>
+    // HTML5 Web Storage API: remember settings between visits
+    const signOutModal = document.getElementById('signOutModal');
+    const saveMessage = document.getElementById('saveMessage');
+
+    function loadSettings() {
+      const saved = localStorage.getItem('mindspaceProfile');
+      if (saved) {
+        const data = JSON.parse(saved);
+        document.getElementById('fullName').value = data.fullName;
+        document.getElementById('email').value = data.email;
+        document.getElementById('language').value = data.language;
+        document.getElementById('notifications').value = data.notifications;
+      }
+    }
+
+    function saveSettings() {
+      const data = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        language: document.getElementById('language').value,
+        notifications: document.getElementById('notifications').value
+      };
+      localStorage.setItem('mindspaceProfile', JSON.stringify(data));
+      saveMessage.textContent = 'Changes saved.';
+    }
+
+    loadSettings();
+  </script>
 
 </body>
 </html>
