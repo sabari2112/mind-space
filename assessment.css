@@ -1,3 +1,4 @@
+/* ── RESET ── */
 * {
   margin: 0;
   padding: 0;
@@ -7,14 +8,17 @@
 body {
   font-family: 'Inter', sans-serif;
   color: #1a1a1a;
+  background: #fafafa;
 }
 
-/* NAV */
+/* ── NAV (Flexbox) ── */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 24px 80px;
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
 }
 
 .logo {
@@ -57,95 +61,346 @@ nav ul a.active {
   font-weight: 500;
 }
 
-/* HERO */
-.assessment-hero {
-  display: flex;
+/* Hamburger button */
+.hamburger {
+  display: none;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 80px 80px 100px;
-  min-height: calc(100vh - 96px);
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
 }
 
+.hamburger span {
+  width: 30px;
+  height: 3px;
+  background: #2d5a4e;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile menu styles */
+@media (max-width: 600px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    flex-direction: column;
+    gap: 0;
+    padding: 80px 24px 24px;
+    z-index: 1000;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  nav ul li {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  nav ul a {
+    display: block;
+    padding: 16px 24px;
+    color: #555;
+  }
+
+  nav ul a:hover,
+  nav ul a.active {
+    background: #eaf2ef;
+    color: #2d5a4e;
+  }
+}
+
+/* ── MAIN WRAPPER ── */
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+/* ── SHARED ── */
 .badge {
   display: inline-block;
   background: #eaf2ef;
   color: #2d5a4e;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 6px 18px;
+  padding: 5px 16px;
   border-radius: 20px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
+  font-size: 2.6rem;
   font-weight: 900;
   text-transform: uppercase;
   line-height: 1.1;
-  margin-bottom: 20px;
-  max-width: 560px;
+  margin-bottom: 18px;
 }
 
 h1 span {
   color: #2d5a4e;
 }
 
-p {
+/* ── SCREEN 1: INTRO ── */
+#screen-intro {
+  text-align: center;
+}
+
+.intro-lead {
   font-size: 15px;
   font-weight: 300;
   color: #555;
   line-height: 1.7;
-  max-width: 520px;
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
-/* INFO CARDS */
+/* Info cards row — Flexbox */
 .info-cards {
   display: flex;
-  gap: 24px;
-  margin-bottom: 48px;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .info-card {
-  background: #f7f7f7;
+  background: #fff;
   border: 1px solid #e5e5e5;
-  padding: 28px 36px;
+  padding: 24px 32px;
   text-align: center;
-  min-width: 150px;
+  min-width: 140px;
 }
 
 .info-icon {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  margin-bottom: 8px;
 }
 
 .info-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .info-value {
   font-size: 14px;
   font-weight: 500;
-  color: #1a1a1a;
 }
 
-/* BUTTON */
+.disclaimer-box {
+  background: #fff8ec;
+  border-left: 3px solid #e0a800;
+  padding: 14px 20px;
+  font-size: 13px;
+  color: #665500;
+  text-align: left;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* Button row — Flexbox */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── SCREEN 2: QUESTIONS ── */
+.progress-wrap {
+  width: 100%;
+  background: #e5e5e5;
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #2d5a4e;
+  border-radius: 3px;
+  width: 0%;
+}
+
+.progress-label {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.question-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 36px 36px 28px;
+  margin-bottom: 24px;
+}
+
+.q-number {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2d5a4e;
+  margin-bottom: 10px;
+}
+
+.q-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #1a1a1a;
+  margin-bottom: 28px;
+}
+
+/* Answer buttons — CSS Grid (5 columns) */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.option-btn {
+  background: #fafafa;
+  border: 2px solid #e5e5e5;
+  padding: 16px 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.option-btn:hover {
+  border-color: #2d5a4e;
+  background: #eaf2ef;
+  color: #2d5a4e;
+}
+
+.option-btn.selected {
+  border-color: #2d5a4e;
+  background: #2d5a4e;
+  color: #fff;
+  font-weight: 500;
+}
+
+.validation-msg {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #c0392b;
+  font-weight: 500;
+}
+
+/* Back / Next row — Flexbox */
+.q-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ── SCREEN 3: RESULTS ── */
+#screen-results {
+  text-align: center;
+}
+
+.result-top {
+  margin-bottom: 24px;
+}
+
+.result-icon {
+  font-size: 52px;
+  margin-bottom: 14px;
+}
+
+.result-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-left: 4px solid #2d5a4e;
+  padding: 24px 28px;
+  text-align: left;
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.75;
+}
+
+.result-score-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.score-chip {
+  background: #eaf2ef;
+  color: #2d5a4e;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.crisis-notice {
+  background: #fff2f2;
+  border-left: 4px solid #c0392b;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #7b1a1a;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.result-disclaimer {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── BUTTONS ── */
 .btn-filled {
   background: #2d5a4e;
-  color: white;
-  padding: 14px 36px;
+  color: #fff;
+  padding: 13px 30px;
   border: 2px solid #2d5a4e;
   font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
   display: inline-block;
 }
 
@@ -157,42 +412,22 @@ p {
 .btn-outline {
   background: transparent;
   color: #2d5a4e;
-  padding: 14px 36px;
+  padding: 13px 30px;
   border: 2px solid #2d5a4e;
   font-size: 15px;
   font-family: 'Inter', sans-serif;
-  display: inline-block;
+  font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
+  display: inline-block;
 }
 
 .btn-outline:hover {
   background: #2d5a4e;
-  color: white;
+  color: #fff;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.returning-banner {
-  background: #eaf2ef;
-  color: #2d5a4e;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 20px;
-  margin-bottom: 24px;
-}
-
-.disclaimer {
-  font-size: 12px;
-  color: #aaa;
-  margin-bottom: 0;
-}
-
-/* MODAL (HTML5 dialog element) */
+/* ── MODAL ── */
 .modal {
   border: none;
   padding: 36px 40px;
@@ -213,6 +448,8 @@ p {
 
 .modal p {
   font-size: 14px;
+  color: #555;
+  line-height: 1.7;
   margin-bottom: 28px;
 }
 
@@ -221,16 +458,20 @@ p {
   justify-content: flex-end;
 }
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   nav { padding: 20px 32px; }
-  .assessment-hero { padding: 60px 32px 80px; }
-  .info-cards { flex-direction: column; align-items: center; }
-  .info-card { width: 100%; max-width: 300px; }
+  main { padding: 40px 20px 60px; }
+  .question-card { padding: 24px 20px; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
   nav ul { display: none; }
-  h1 { font-size: 2.2rem; }
-  .hero-actions { flex-direction: column; width: 100%; }
+  h1 { font-size: 2rem; }
+
+  /* Stack answer buttons into 1 column on mobile */
+  .options-grid { grid-template-columns: 1fr; }
+
+  .q-nav { flex-direction: column-reverse; }
+  .q-nav button { width: 100%; }
 }

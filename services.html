@@ -10,6 +10,11 @@
 <body>
 
   <nav>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="logo">
       <img src="images/logo-icon.png" alt="MindSpace Icon"/>
       <div>
@@ -17,7 +22,8 @@
         <span>SPACE</span>
       </div>
     </div>
-    <ul>
+    <ul id="navLinks">
+      <li><a href="home.html">Home</a></li>
       <li><a href="assessment.html">Assessment</a></li>
       <li><a href="services.html" class="active">Services</a></li>
       <li><a href="about.html">About Us</a></li>
@@ -133,6 +139,11 @@
 
     function closeBooking() {
       bookingModal.close();
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
     }
   </script>
 

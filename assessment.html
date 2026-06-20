@@ -10,6 +10,11 @@
 <body>
 
   <nav>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="logo">
       <img src="images/logo-icon.png" alt="MindSpace Icon"/>
       <div>
@@ -17,7 +22,8 @@
         <span>SPACE</span>
       </div>
     </div>
-    <ul>
+    <ul id="navLinks">
+      <li><a href="home.html">Home</a></li>
       <li><a href="assessment.html" class="active">Assessment</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About Us</a></li>
@@ -25,60 +31,348 @@
     </ul>
   </nav>
 
-  <section class="assessment-hero">
-    <p id="returningBanner" class="returning-banner" hidden>Welcome back — pick up your assessment whenever you're ready.</p>
+  <main>
 
-    <div class="badge">Mental Health Assessment</div>
-    <h1>Understand yourself <span>better</span></h1>
-    <p>
-      This short assessment helps us understand where you are right now —
-      emotionally, mentally, and socially — so we can guide you to the
-      professional support that truly fits you.
-    </p>
+    <!-- ── SCREEN 1: INTRO ── -->
+    <section id="screen-intro">
+      <div class="badge">Mental Health Screening</div>
+      <h1>Understand yourself <span>better</span></h1>
+      <p class="intro-lead">
+        This 10-question screening helps us understand where you are right now so we
+        can guide you to the right professional support.
+      </p>
 
-    <div class="info-cards">
-      <div class="info-card">
-        <div class="info-icon">&#9201;</div>
-        <div class="info-label">Duration</div>
-        <div class="info-value">5 – 10 minutes</div>
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">&#9201;</div>
+          <div class="info-label">Duration</div>
+          <div class="info-value">5 – 10 minutes</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">&#128274;</div>
+          <div class="info-label">Privacy</div>
+          <div class="info-value">100% confidential</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">&#128203;</div>
+          <div class="info-label">Questions</div>
+          <div class="info-value">10 questions</div>
+        </div>
       </div>
-      <div class="info-card">
-        <div class="info-icon">&#128274;</div>
-        <div class="info-label">Privacy</div>
-        <div class="info-value">100% confidential</div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">&#128203;</div>
-        <div class="info-label">Questions</div>
-        <div class="info-value">12 questions</div>
-      </div>
-    </div>
 
-    <div class="hero-actions">
-      <a href="questions.html" class="btn-filled">Begin Assessment</a>
-      <button type="button" class="btn-outline" onclick="privacyModal.showModal()">How we use this</button>
-    </div>
-    <p class="disclaimer">Your answers are never shared without your consent.</p>
-  </section>
+      <div class="disclaimer-box">
+        <strong>Important:</strong> This is a <em>preliminary guidance tool</em>, not a clinical
+        diagnosis. Always consult a qualified professional for a proper evaluation.
+      </div>
 
-  <!-- PRIVACY INFO MODAL (HTML5 <dialog> element) -->
+      <div class="hero-actions">
+        <button class="btn-filled" onclick="startAssessment()">Begin Assessment</button>
+        <button class="btn-outline" onclick="document.getElementById('privacyModal').showModal()">How we use this</button>
+      </div>
+    </section>
+
+
+    <!-- ── SCREEN 2: QUESTIONS ── -->
+    <section id="screen-questions" style="display:none;">
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">Question 1 of 10</p>
+
+      <div class="question-card">
+        <p class="q-number" id="qNumber">Q1</p>
+        <h2 class="q-text" id="qText"></h2>
+
+        <div class="options-grid" id="optionsGrid">
+          <!-- Buttons injected by JS -->
+        </div>
+
+        <p class="validation-msg" id="validationMsg" style="display:none;">
+          Please select an answer before continuing.
+        </p>
+      </div>
+
+      <div class="q-nav">
+        <button class="btn-outline" id="prevBtn" onclick="goBack()">&#8592; Back</button>
+        <button class="btn-filled" id="nextBtn" onclick="goNext()">Next &#8594;</button>
+      </div>
+
+    </section>
+
+
+    <!-- ── SCREEN 3: RESULTS ── -->
+    <section id="screen-results" style="display:none;">
+
+      <div class="result-top">
+        <div class="result-icon" id="resultIcon"></div>
+        <div class="badge">Your Result</div>
+        <h1>A <span id="resultRole"></span> may be right for you</h1>
+      </div>
+
+      <div class="result-card">
+        <p id="resultDescription"></p>
+      </div>
+
+      <div class="result-score-row">
+        <div class="score-chip">Total score: <strong id="resultScore"></strong> / 40</div>
+      </div>
+
+      <div class="crisis-notice" id="crisisNotice" style="display:none;">
+        &#9888; <strong>Important:</strong> Your response to question 9 suggests you may be
+        experiencing thoughts of self-harm. Please reach out to a trusted person or call
+        <strong>iCall: 9152987821</strong> right away.
+      </div>
+
+      <p class="result-disclaimer">
+        This result is a <strong>preliminary guidance tool only</strong>, not a clinical diagnosis.
+        A qualified professional will conduct a full evaluation during your first session.
+      </p>
+
+      <div class="result-actions">
+        <a href="services.html" class="btn-filled">View Professionals &#8594;</a>
+        <button class="btn-outline" onclick="retakeAssessment()">Retake Assessment</button>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- PRIVACY MODAL -->
   <dialog id="privacyModal" class="modal">
     <h3>How we use your answers</h3>
-    <p>Your responses are used only to match you with a suitable professional from our Services page. They're never sold, shared with advertisers, or shown to anyone besides your matched professional.</p>
+    <p>Your responses are processed entirely in your browser and are never sent to a server or shared
+       with anyone. The result is stored locally on your device so you can refer back to it.</p>
     <div class="modal-actions">
-      <button type="button" class="btn-outline" onclick="privacyModal.close()">Got it</button>
+      <button class="btn-outline" onclick="document.getElementById('privacyModal').close()">Got it</button>
     </div>
   </dialog>
 
-  <script>
-    // HTML5 Web Storage API: greet returning visitors
-    const privacyModal = document.getElementById('privacyModal');
-    const returningBanner = document.getElementById('returningBanner');
 
-    if (localStorage.getItem('mindspaceVisited')) {
-      returningBanner.hidden = false;
+  <script>
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
     }
-    localStorage.setItem('mindspaceVisited', 'true');
+
+    // ── QUESTION DATA ──────────────────────────────────────────
+    var questions = [
+      "Have you been feeling sad, anxious, stressed, or emotionally overwhelmed lately?",
+      "Are your emotions affecting your work, studies, relationships, or daily activities?",
+      "Do you often struggle with life decisions, relationship conflicts, grief, or personal challenges?",
+      "Do you find it difficult to cope with stress even after talking to friends or family?",
+      "Have these emotional difficulties lasted for more than a few weeks?",
+      "Do you experience panic attacks, severe anxiety, intense mood swings, or persistent feelings of hopelessness?",
+      "Have you noticed significant changes in sleep, appetite, energy levels, or concentration?",
+      "Do you feel emotionally stuck despite trying self-help methods or coping strategies?",
+      "Have you ever had thoughts of harming yourself or felt that life is not worth living?",
+      "Have you previously been diagnosed with a mental health condition or taken psychiatric medication?"
+    ];
+
+    var answerLabels = ["Never", "Rarely", "Sometimes", "Often", "Almost Always"];
+
+    // ── STATE ──────────────────────────────────────────────────
+    var currentQuestion = 0;
+    var answers = [null, null, null, null, null, null, null, null, null, null];
+    var selectedValue = null;
+
+    // ── SHOW / HIDE SCREENS ────────────────────────────────────
+    function showScreen(screenId) {
+      document.getElementById("screen-intro").style.display     = "none";
+      document.getElementById("screen-questions").style.display = "none";
+      document.getElementById("screen-results").style.display   = "none";
+      document.getElementById(screenId).style.display = "block";
+    }
+
+    // ── START ──────────────────────────────────────────────────
+    function startAssessment() {
+      currentQuestion = 0;
+      answers = [null, null, null, null, null, null, null, null, null, null];
+      selectedValue = null;
+      showScreen("screen-questions");
+      renderQuestion();
+    }
+
+    // ── RENDER QUESTION ────────────────────────────────────────
+    function renderQuestion() {
+      // Update question number and text
+      document.getElementById("qNumber").textContent = "Q" + (currentQuestion + 1);
+      document.getElementById("qText").textContent   = questions[currentQuestion];
+
+      // Update progress bar
+      var pct = (currentQuestion / 10) * 100;
+      document.getElementById("progressBar").style.width = pct + "%";
+      document.getElementById("progressLabel").textContent =
+        "Question " + (currentQuestion + 1) + " of 10";
+
+      // Update Next button label on last question
+      if (currentQuestion === 9) {
+        document.getElementById("nextBtn").textContent = "See My Result";
+      } else {
+        document.getElementById("nextBtn").textContent = "Next \u2192";
+      }
+
+      // Disable Back on first question
+      if (currentQuestion === 0) {
+        document.getElementById("prevBtn").disabled = true;
+      } else {
+        document.getElementById("prevBtn").disabled = false;
+      }
+
+      // Restore saved answer for this question
+      selectedValue = answers[currentQuestion];
+
+      // Build answer option buttons
+      var grid = document.getElementById("optionsGrid");
+      grid.innerHTML = "";
+
+      for (var i = 0; i < answerLabels.length; i++) {
+        var btn = document.createElement("button");
+        btn.textContent = i + " – " + answerLabels[i];
+        btn.className = "option-btn";
+        btn.setAttribute("data-value", i);
+
+        // Highlight if this was previously selected
+        if (selectedValue === i) {
+          btn.classList.add("selected");
+        }
+
+        // Using a self-invoking function to capture i correctly in the loop
+        btn.onclick = (function(val) {
+          return function() {
+            selectAnswer(val);
+          };
+        })(i);
+
+        grid.appendChild(btn);
+      }
+
+      // Hide validation message
+      document.getElementById("validationMsg").style.display = "none";
+
+      window.scrollTo(0, 0);
+    }
+
+    // ── SELECT AN ANSWER ───────────────────────────────────────
+    function selectAnswer(value) {
+      selectedValue = value;
+
+      // Highlight the clicked button, remove highlight from others
+      var buttons = document.getElementById("optionsGrid").getElementsByTagName("button");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("selected");
+      }
+      buttons[value].classList.add("selected");
+
+      // Hide validation message if it was showing
+      document.getElementById("validationMsg").style.display = "none";
+    }
+
+    // ── NEXT BUTTON ────────────────────────────────────────────
+    function goNext() {
+      // Validation: must pick an answer
+      if (selectedValue === null) {
+        document.getElementById("validationMsg").style.display = "block";
+        return;
+      }
+
+      // Save the answer
+      answers[currentQuestion] = selectedValue;
+
+      if (currentQuestion === 9) {
+        // Last question — show results
+        showResults();
+      } else {
+        currentQuestion = currentQuestion + 1;
+        selectedValue = null;
+        renderQuestion();
+      }
+    }
+
+    // ── BACK BUTTON ────────────────────────────────────────────
+    function goBack() {
+      if (currentQuestion > 0) {
+        // Save current answer if selected
+        if (selectedValue !== null) {
+          answers[currentQuestion] = selectedValue;
+        }
+        currentQuestion = currentQuestion - 1;
+        selectedValue = null;
+        renderQuestion();
+      }
+    }
+
+    // ── SCORING ────────────────────────────────────────────────
+    function showResults() {
+      // Add up all answers
+      var total = 0;
+      for (var i = 0; i < answers.length; i++) {
+        total = total + answers[i];
+      }
+
+      var q9  = answers[8];   // Question 9 (index 8)
+      var q6  = answers[5];   // Question 6 (index 5)
+      var q7  = answers[6];   // Question 7 (index 6)
+      var q10 = answers[9];   // Question 10 (index 9)
+
+      var role, icon, description;
+      var isCrisis = false;
+
+      if (q9 > 0) {
+        // Crisis path — always Psychiatrist
+        role = "Psychiatrist";
+        icon = "&#128104;&#8205;&#9877;&#65039;";
+        description = "A Psychiatrist consultation is recommended. Your responses suggest symptoms that may require a medical evaluation, and potentially medication alongside therapy. A psychiatrist is a medical doctor who can diagnose mental health conditions and create a comprehensive treatment plan.";
+        isCrisis = true;
+
+      } else if (total >= 25 || (q6 >= 3 && q7 >= 3 && q10 >= 3)) {
+        role = "Psychiatrist";
+        icon = "&#128104;&#8205;&#9877;&#65039;";
+        description = "A Psychiatrist consultation is recommended. Your responses suggest symptoms that may require a medical evaluation, and potentially medication alongside therapy. A psychiatrist is a medical doctor who can diagnose mental health conditions and create a comprehensive treatment plan.";
+
+      } else if (total >= 13) {
+        role = "Therapist";
+        icon = "&#129488;";
+        description = "A Therapist may be appropriate for you. Your responses suggest ongoing emotional or psychological difficulties that could benefit from structured therapy. A licensed therapist can help you explore patterns of thought and behaviour, process difficult emotions, and develop lasting coping strategies.";
+
+      } else {
+        role = "Counsellor";
+        icon = "&#129492;";
+        description = "A Counsellor may be appropriate for you. Your responses suggest concerns related to life challenges, stress management, relationship difficulties, or general emotional support needs. Counselling provides a safe, supportive space to talk through challenges and build effective coping strategies.";
+      }
+
+      // Update results screen
+      document.getElementById("resultIcon").innerHTML        = icon;
+      document.getElementById("resultRole").textContent      = role;
+      document.getElementById("resultDescription").textContent = description;
+      document.getElementById("resultScore").textContent     = total;
+
+      // Show or hide crisis notice
+      if (isCrisis) {
+        document.getElementById("crisisNotice").style.display = "block";
+      } else {
+        document.getElementById("crisisNotice").style.display = "none";
+      }
+
+      // Save result to localStorage
+      localStorage.setItem("mindspaceResult", role);
+      localStorage.setItem("mindspaceScore", total);
+
+      showScreen("screen-results");
+      window.scrollTo(0, 0);
+    }
+
+    // ── RETAKE ─────────────────────────────────────────────────
+    function retakeAssessment() {
+      currentQuestion = 0;
+      answers = [null, null, null, null, null, null, null, null, null, null];
+      selectedValue = null;
+      showScreen("screen-intro");
+      window.scrollTo(0, 0);
+    }
+
   </script>
 
 </body>
